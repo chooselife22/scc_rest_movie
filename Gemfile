@@ -34,7 +34,6 @@ gem 'bcrypt', '~> 3.1.7'
 
 group :development, :test do
   # Call 'debugger' anywhere in the code to stop execution and get a debugger console
-  gem 'debugger'
   gem 'pry-rails'
 
   # Access an IRB console on exception pages or by using <%= console %> in views
