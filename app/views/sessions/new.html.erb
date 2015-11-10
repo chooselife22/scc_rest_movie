@@ -1,0 +1,11 @@
+<h1>Log in</h1>
+
+<%= form_tag sign_in_path do %>
+  <%= label_tag :email, "Email" %>
+  <%= email_field :user, :email %>
+
+  <%= label_tag :password, "Passwort" %>
+  <%= password_field(:user, :password, size: 20) %>
+
+  <%= submit_tag "Log in" %>
+<% end %>
