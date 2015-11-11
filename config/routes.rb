@@ -2,10 +2,12 @@ Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
+  get '/movies', to: 'movies#index'
+
   resources :sessions, only: [:new, :index]
 
-  post '/sign_in', to: 'sessions#sign_in'
-  post '/sign_out', to: 'sessions#sign_out'
+  post '/sign_in', to: 'sessions#create'
+  post '/sign_out', to: 'sessions#destroy'
 
   # You can have the root of your site routed with "root"
   root 'sessions#index'

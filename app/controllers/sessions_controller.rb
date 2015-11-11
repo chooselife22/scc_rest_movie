@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  def sign_in
+  def create
     user = User.find_by_email(params[:user][:email])
     if user && user.authenticate(params[:user][:password])
       session[:user_id] = user.id
@@ -15,9 +15,9 @@ class SessionsController < ApplicationController
     end
   end
 
-  def sign_out
-    if session[:user_id] && token = AuthToken.find_by_token(params[:token]).delete
-      session[:user_id].delete
+  def destroy
+    if session[:user_id] && token = AuthToken.find_by_token(params[:token])
+      session[:user_id] = nil
       token.delete
       render json: {
         status: 200
