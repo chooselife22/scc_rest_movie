@@ -3,10 +3,10 @@ class SessionsController < ApplicationController
     user = User.find_by_email(params[:user][:email])
     if user && user.authenticate(params[:user][:password])
       session[:user_id] = user.id
-      token = AuthToken.create
+      at = AuthToken.create
       render json: {
         status: 200,
-        token: token.token
+        token: at.token
       }
     else
       render json: {
