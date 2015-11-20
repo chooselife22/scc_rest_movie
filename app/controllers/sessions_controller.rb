@@ -1,17 +1,18 @@
 class SessionsController < ApplicationController
   def create
+    binding.pry
     user = User.find_by_email(params[:user][:email])
     if user && user.authenticate(params[:user][:password])
       session[:user_id] = user.id
       at = AuthToken.create
       render json: {
-        status: 200,
+        message: 'you are now logged in',
         token: at.token
-      }
+      }, status: 200
     else
       render json: {
-        status: 401
-      }
+        message: 'invalid credentials, please try again'
+      }, status: 401
     end
   end
 
@@ -20,12 +21,12 @@ class SessionsController < ApplicationController
       session[:user_id] = nil
       token.delete
       render json: {
-        status: 200
-      }
+        message: 'you are now logged out',
+      }, status: 200
     else
       render json: {
-        status: 'alles kapputt'
-      }
+        message: 'there are problems with your session or auth_token. i dont know'
+      }, status: 404
     end
   end
 

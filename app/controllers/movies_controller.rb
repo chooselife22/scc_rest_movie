@@ -20,9 +20,8 @@ class MoviesController < ApplicationController
       end
     else
       render json: {
-        status: 403,
-        message: "Forbidden... HAHAHAHA"
-      }
+        message: "you are not allowed to view movies. check your auth_token"
+      }, status: 403
     end
   end
 end
