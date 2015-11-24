@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
       at = AuthToken.create
       render json: {
         message: 'you are now logged in',
-        token: at.token
+        token: at.token,
       }, status: 200
     else
       render json: {

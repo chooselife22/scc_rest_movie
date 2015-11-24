@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   get '/movies', to: 'movies#index'
+  post '/search', to: 'search#search'
 
   resources :sessions, only: [:new, :index]
 
