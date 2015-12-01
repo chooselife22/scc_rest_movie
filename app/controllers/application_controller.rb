@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
 
   def current_user
     if headers[:authentication]
-      token = AuthToken.find_by_token(params[:token])
+      token = AuthToken.find_by_token(headers[:authentication])
       user = token.user
       user if user
       #TODO user nicht vorhanden
@@ -14,18 +14,20 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_user!
-    if params[:token]
-      at = AuthToken.find_by_token(params[:token])
-      if  at && at.valid_token?
-        at.extend_auth_token
+    if headers[:authentication]
+      token = AuthToken.find_by_token(headers[:authentication])
+      if token && token.valid_token?
+        token.extend_auth_token
       else
         render json: {
-          message: "your token is out of date, please login and try again"
+          message: "your token is out of date, please login and try again",
+          response_status: "token_expired"
         }, status: 403
       end
     else
       render json: {
-        message: "you are not allowed to view movies. check your auth_token"
+        message: "you are not allowed. check your auth_token",
+        response_status: "token_missing"
       }, status: 403
     end
   end
