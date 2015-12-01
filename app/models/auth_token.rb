@@ -1,5 +1,6 @@
 require 'securerandom'
 class AuthToken < ActiveRecord::Base
+  belongs_to :user
   before_create :generate_auth_token
 
   def valid_token?

@@ -1,13 +1,25 @@
 class SessionsController < ApplicationController
   def create
+    json = {
+      message: 'you are now logged in',
+      token: token.token,
+    } 
     user = User.find_by_email(params[:user][:email])
     if user && user.authenticate(params[:user][:password])
-      session[:user_id] = user.id
-      at = AuthToken.create
-      render json: {
-        message: 'you are now logged in',
-        token: at.token,
-      }, status: 200
+      token = user.auth_token
+      if token && token.valid_token?
+        token.extend_auth_token
+      elsif token && !token.valid?
+        token.delete
+        at = AuthToken.create
+        user.auth_token = at
+        user.save!
+      elsif !token
+        at = AuthToken.create
+        user.auth_token = at
+        user.save!
+      end
+      render json: json, status: 200
     else
       render json: {
         message: 'invalid credentials, please try again'
@@ -16,13 +28,13 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    if session[:user_id] && token = AuthToken.find_by_token(params[:token])
-      session[:user_id] = nil
+    if token = AuthToken.find_by_token(params[:token])
       token.delete
       render json: {
         message: 'you are now logged out',
       }, status: 200
     else
+      #irgendwie komisch hier
       render json: {
         message: 'there are problems with your session or auth_token. i dont know'
       }, status: 404
