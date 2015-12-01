@@ -5,8 +5,8 @@ class ApplicationController < ActionController::Base
   #skip_before_action :verify_authenticity_token
 
   def current_user
-    if headers[:authentication]
-      token = AuthToken.find_by_token(headers[:authentication])
+    if request.authorization
+      token = AuthToken.find_by_token(request.authorization)
       user = token.user
       user if user
       #TODO user nicht vorhanden
@@ -14,8 +14,8 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_user!
-    if headers[:authentication]
-      token = AuthToken.find_by_token(headers[:authentication])
+    if request.authorization
+      token = AuthToken.find_by_token(request.authorization)
       if token && token.valid_token?
         token.extend_auth_token
       else
