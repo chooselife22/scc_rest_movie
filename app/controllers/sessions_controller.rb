@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
           message: 'you are now logged in',
           token: token.token,
         } 
-      elsif token && !token.valid?
+      elsif token && !token.valid_token?
         token.delete
         at = AuthToken.create
         user.auth_token = at
