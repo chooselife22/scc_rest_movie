@@ -19,3 +19,5 @@
 # Vim
 **.swo
 **.swp
+
+/public
