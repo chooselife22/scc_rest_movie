@@ -1,23 +1,31 @@
 class SessionsController < ApplicationController
   def create
-    json = {
-      message: 'you are now logged in',
-      token: token.token,
-    } 
     user = User.find_by_email(params[:user][:email])
     if user && user.authenticate(params[:user][:password])
       token = user.auth_token
       if token && token.valid_token?
         token.extend_auth_token
+        json = {
+          message: 'you are now logged in',
+          token: token.token,
+        } 
       elsif token && !token.valid?
         token.delete
         at = AuthToken.create
         user.auth_token = at
         user.save!
+        json = {
+          message: 'you are now logged in',
+          token: at.token,
+        } 
       elsif !token
         at = AuthToken.create
         user.auth_token = at
         user.save!
+        json = {
+          message: 'you are now logged in',
+          token: at.token,
+        } 
       end
       render json: json, status: 200
     else
