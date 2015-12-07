@@ -2,7 +2,7 @@
 curl http://localhost:3000/movies
 
 # Login
-curl --data "user[email]=andy@example.com&user[password]=test123" http://localhost:3000/sign_in
+curl --data "user[email]=test&user[password]=test" http://localhost:3000/sign_in
 
 # Movies mit Token
 curl -H "Authorization: <token>" http://localhost:3000/movies
