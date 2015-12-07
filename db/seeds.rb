@@ -6,4 +6,9 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 #
-User.create(email: "test", password: "test", password_confirmation: "test")
+
+
+user = User.create(email: "test", password: "test", password_confirmation: "test")
+OmdbApi.search("Batman")
+user.movies = Movie.last(2)
+user.save
