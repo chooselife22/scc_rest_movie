@@ -15,6 +15,7 @@ class MoviesController < ApplicationController
 
   def create
     current_user.movies.push movie
+    render json: {movie: movie}, status: 201
   end
 
   def delete

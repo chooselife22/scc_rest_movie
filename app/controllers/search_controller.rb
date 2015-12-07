@@ -7,10 +7,12 @@ class SearchController < ApplicationController
     search_results.each do |m|
       create_movie_if_not_exists!(m)
     end
-    json = {
-      search_results: search_results
-    }
-    render json: json, status: 200
+    movies = []
+    search_results.each do |sr|
+      movie = Movie.find_by_imdb_id(sr["imdbID"])
+      movies.push movie
+    end
+    render json: movies, status: 200
   end
 
   private
