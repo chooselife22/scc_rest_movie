@@ -30,7 +30,8 @@ gem 'httparty'
 gem 'carrierwave'
 gem 'rmagick'
 
-gem 'oauth'
+gem 'omniauth'
+gem 'omniauth-twitter'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
