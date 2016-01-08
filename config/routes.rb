@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   post '/sign_in', to: 'sessions#create'
   post '/sign_out', to: 'sessions#destroy'
 
+  post '/oauth/twitter', to: 'sessions#oauth_twitter'
+
   # You can have the root of your site routed with "root"
   root 'sessions#index'
 

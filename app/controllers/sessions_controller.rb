@@ -59,4 +59,15 @@ class SessionsController < ApplicationController
 
   def new
   end
+
+  def oauth_twitter
+    if app_credentials = params[:app_credentials]
+      TwitterApi::Connector.new(app_credentials[:consumer_key], app_credentials[:consumer_secret], '/oauth/twitter/callback')
+      binding.pry
+    else
+      render json: {
+        message: 'please provide your twitter credentials'
+      }, status: 404
+    end
+  end
 end
