@@ -62,7 +62,7 @@ class SessionsController < ApplicationController
 
   def oauth_twitter
     if app_credentials = params[:app_credentials]
-      TwitterApi::Connector.new(app_credentials[:consumer_key], app_credentials[:consumer_secret], '/oauth/twitter/callback')
+      TwitterApi::Connector.new(app_credentials[:consumer_key], app_credentials[:consumer_secret], 'http://localhost:3000/oauth/twitter/callback')
       binding.pry
     else
       render json: {
