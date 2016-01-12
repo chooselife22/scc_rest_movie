@@ -62,10 +62,25 @@ class SessionsController < ApplicationController
   def new
   end
 
-  def auth_twitter
+  def create_from_google_oauth2
+    user_google_data = request.env['omniauth.auth']['info'].to_hash
+
+    # You should use the session handler you prefer here to create a session
+    @user = {
+      email: user_google_data['email'],
+      authentication_token: SecureRandom.hex
+    }
+
+    # Render a json success template
+    render json: {
+      message: "das war einfach"
+    }, 200
   end
 
-  def one_time_code
-    binding.pry
+  def oauth_failure
+    @error = request.env['omniauth.error']
+
+    # Render a json error template
+    render json: {message: "bist du dumm?"}, status: 401
   end
 end

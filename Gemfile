@@ -31,7 +31,7 @@ gem 'carrierwave'
 gem 'rmagick'
 
 gem 'omniauth'
-gem 'omniauth-twitter'
+gem 'omniauth-google-oauth2', github: 'zquestz/omniauth-google-oauth2', branch: 'master'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
