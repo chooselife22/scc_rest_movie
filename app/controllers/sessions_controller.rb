@@ -59,28 +59,16 @@ class SessionsController < ApplicationController
     end
   end
 
-  def new
-  end
-
   def create_from_google_oauth2
     user_google_data = request.env['omniauth.auth']['info'].to_hash
-
-    # You should use the session handler you prefer here to create a session
     @user = {
       email: user_google_data['email'],
       authentication_token: SecureRandom.hex
     }
-
-    # Render a json success template
-    render json: {
-      message: "das war einfach"
-    }, 200
+    render json: { message: "das war einfach" }, status: 200
   end
-
   def oauth_failure
     @error = request.env['omniauth.error']
-
-    # Render a json error template
-    render json: {message: "bist du dumm?"}, status: 401
+    render json: { message: "bist du dumm?" }, status: 401
   end
 end
