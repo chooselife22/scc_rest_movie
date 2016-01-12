@@ -63,6 +63,9 @@ class SessionsController < ApplicationController
   end
 
   def auth_twitter
+  end
+
+  def one_time_code
     binding.pry
   end
 end
