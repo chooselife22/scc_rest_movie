@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   post '/sign_out', to: 'sessions#destroy'
 
   get '/auth/:provider/callback', to: 'sessions#auth_twitter'
+  post '/auth/one_time_code', to: 'sessions#one_time_code'
 
   # You can have the root of your site routed with "root"
   root 'sessions#index'

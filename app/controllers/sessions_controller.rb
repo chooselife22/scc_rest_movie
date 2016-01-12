@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  #skip_before_filter :verify_authenticity_token, only: :auth_twitter
+
   def create
     user = User.find_by_email(params[:user][:email])
     if user && user.authenticate(params[:user][:password])
