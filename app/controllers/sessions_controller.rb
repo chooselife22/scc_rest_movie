@@ -60,12 +60,37 @@ class SessionsController < ApplicationController
   end
 
   def create_from_google_oauth2
-    user_google_data = request.env['omniauth.auth']['info'].to_hash
-    @user = {
-      email: user_google_data['email'],
-      authentication_token: SecureRandom.hex
-    }
-    render json: { message: "das war einfach" }, status: 200
+    user_google_data = request.env['omniauth.auth']
+    user = User.from_google_oauth2(user_google_data)
+
+    binding.pry
+
+    token = user.auth_token
+    if token && token.valid_token?
+      token.extend_auth_token
+      json = {
+        message: 'you are now logged in',
+        token: token.token,
+      } 
+    elsif token && !token.valid_token?
+      token.delete
+      at = AuthToken.create
+      user.auth_token = at
+      user.save!
+      json = {
+        message: 'you are now logged in',
+        token: at.token,
+      } 
+    elsif !token
+      at = AuthToken.create
+      user.auth_token = at
+      user.save!
+      json = {
+        message: 'you are now logged in',
+        token: at.token,
+      } 
+    end
+    render json: json, status: 200
   end
   def oauth_failure
     @error = request.env['omniauth.error']
