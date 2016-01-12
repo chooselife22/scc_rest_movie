@@ -33,6 +33,8 @@ gem 'rmagick'
 gem 'omniauth'
 gem 'omniauth-google-oauth2', github: 'zquestz/omniauth-google-oauth2', branch: 'master'
 
+gem 'i18n', github: 'svenfuchs/i18n'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 

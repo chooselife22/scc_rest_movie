@@ -1,4 +1,10 @@
 GIT
+  remote: git://github.com/svenfuchs/i18n.git
+  revision: f19893d84262261d9c8abe303f465ea28ba057e4
+  specs:
+    i18n (0.7.0)
+
+GIT
   remote: git://github.com/zquestz/omniauth-google-oauth2.git
   revision: 0e4352a3159b5cc3c00fbe02d47d2f5e45169a7e
   branch: master
@@ -76,7 +82,6 @@ GEM
     httparty (0.13.7)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
-    i18n (0.7.0)
     jbuilder (2.3.2)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
@@ -191,6 +196,7 @@ DEPENDENCIES
   carrierwave
   coffee-rails (~> 4.1.0)
   httparty
+  i18n!
   jbuilder (~> 2.0)
   jquery-rails
   omniauth
@@ -207,4 +213,4 @@ DEPENDENCIES
   web-console (~> 2.0)
 
 BUNDLED WITH
-   1.10.6
+   1.11.2

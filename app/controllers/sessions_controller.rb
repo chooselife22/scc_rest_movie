@@ -62,9 +62,7 @@ class SessionsController < ApplicationController
   def create_from_google_oauth2
     user_google_data = request.env['omniauth.auth']
     user = User.from_google_oauth2(user_google_data)
-
-    binding.pry
-
+    
     token = user.auth_token
     if token && token.valid_token?
       token.extend_auth_token
