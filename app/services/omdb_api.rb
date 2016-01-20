@@ -16,6 +16,9 @@ class OmdbApi
         movie = Movie.find_by_imdb_id(sr["imdbID"])
         movies.push movie if movie
       end
+      movies.each do |m|
+        m.owns = current_user.movies.include? m
+      end
       movies
     else
       movies
