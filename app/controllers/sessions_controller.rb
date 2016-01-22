@@ -6,6 +6,7 @@ class SessionsController < ApplicationController
     if identity && identity.authenticate(params[:user][:password])
       if identity.user.nil? 
         user = User.where(email: params[:user][:email]).first_or_create do |u|
+          u.provider = "email"
           u.identities.push identity
         end
       else
