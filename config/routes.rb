@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   post '/sign_in', to: 'sessions#create'
   post '/sign_out', to: 'sessions#destroy'
+  #TODO post '/register', to: 'sessions#register'
 
   post '/auth/:provider/callback', to: 'sessions#create_from_google_oauth2'   
 
