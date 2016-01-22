@@ -2,6 +2,12 @@ class MoviesController < ApplicationController
   before_action :authenticate_user!
   before_action only: [:show]
 
+  swagger_controller :movies, "Movies"
+
+  swagger_api :index do
+    summary "Returns all Movies for the current User"
+  end
+
   def index
     @movies = current_user.movies
     render json: {

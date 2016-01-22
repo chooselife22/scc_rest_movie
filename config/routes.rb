@@ -18,6 +18,7 @@ Rails.application.routes.draw do
 
   post '/auth/:provider/callback', to: 'sessions#create_from_google_oauth2'   
 
+  get '/api', to: 'api_docu#index'
   # You can have the root of your site routed with "root"
   root 'sessions#index'
 end
