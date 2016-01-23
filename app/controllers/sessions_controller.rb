@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
         user = identity.user
       end
       token = user.auth_token
-      json = handle_token(token)
+      json = handle_token(token, user)
       render json: json, status: 200
     else
       render json: {
@@ -55,7 +55,7 @@ class SessionsController < ApplicationController
       user = identity.user
     end
     token = user.auth_token
-    json = handle_token(token)
+    json = handle_token(token, user)
     render json: json, status: 200
   end
   def oauth_failure
@@ -63,7 +63,7 @@ class SessionsController < ApplicationController
     render json: { message: "bist du dumm?" }, status: 401
   end
 
-  def handle_token(token)
+  def handle_token(token, user)
     if token && token.valid_token?
       token.extend_auth_token
       json = {
