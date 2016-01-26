@@ -15,7 +15,7 @@ class OmdbApi
       end
       search_results.each do |sr|
         movie = Movie.find_by_imdb_id(sr["imdbID"])
-        update_with_further_attributes!(m) if movie.genre.blank?
+        update_with_further_attributes!(movie) if movie.genre.blank?
         movies.push movie if movie
       end
       movies
