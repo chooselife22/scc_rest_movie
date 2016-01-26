@@ -6,7 +6,6 @@ class SessionsController < ApplicationController
     if identity && identity.authenticate(params[:user][:password])
       if identity.user.nil? 
         user = User.where(email: params[:user][:email]).first_or_create do |u|
-          u.provider = "email"
           u.identities.push identity
         end
       else
@@ -49,6 +48,7 @@ class SessionsController < ApplicationController
     identity = Identity.from_google_oauth2(user_google_data)
     if identity.user.nil? 
       user = User.where(email: user_google_data["info"]["email"]).first_or_create do |u|
+        u.name = user_google_data["info"]["name"]
         u.identities.push identity
       end
     else
