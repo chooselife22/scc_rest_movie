@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160112162704) do
+ActiveRecord::Schema.define(version: 20160122131728) do
 
   create_table "auth_tokens", force: :cascade do |t|
     t.string   "token"
@@ -21,13 +21,24 @@ ActiveRecord::Schema.define(version: 20160112162704) do
     t.integer  "user_id"
   end
 
+  create_table "identities", force: :cascade do |t|
+    t.string  "provider"
+    t.string  "uid"
+    t.string  "email"
+    t.string  "password_digest"
+    t.integer "user_id"
+  end
+
   create_table "movies", force: :cascade do |t|
     t.string   "title"
     t.string   "release"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.string   "imdb_id"
     t.string   "poster"
+    t.string   "genre"
+    t.string   "imdb_rating"
+    t.string   "imdb_type"
   end
 
   create_table "movies_users", force: :cascade do |t|
@@ -38,10 +49,8 @@ ActiveRecord::Schema.define(version: 20160112162704) do
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.string   "email"
-    t.string   "password_digest"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.string   "google_uid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
