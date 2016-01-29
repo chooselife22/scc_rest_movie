@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   delete '/movies',to: 'movies#delete'
   post '/movies', to: 'movies#create'
 
+  resources :apidocs, only: [:index]
+  get '/apidocs/docu', to: 'apidocs#docu'
+
   get '/search/:search_term', to: 'search#search'
   get '/search/title/:title', to: 'search#title'
   get '/search/id/:id', to: 'search#id'

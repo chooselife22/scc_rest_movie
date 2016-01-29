@@ -33,7 +33,8 @@ gem 'rmagick'
 gem 'omniauth'
 gem 'omniauth-google-oauth2', github: 'zquestz/omniauth-google-oauth2', branch: 'master'
 
-gem 'swagger-ui_rails'
+gem 'swagger-ui_rails', '2.1.0.alpha.7.1'
+gem 'swagger-blocks'
 
 # Use Unicorn as the app server
 # gem 'unicorn'

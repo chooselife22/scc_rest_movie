@@ -1,6 +1,19 @@
 class MoviesController < ApplicationController
+  include Swagger::Blocks
+
   before_action :authenticate_user!
 
+  swagger_path '/movies' do
+    operation :get do
+      key :description, 'Returns all Movies of the Current User'
+      response 200 do
+        key :description, 'Movies Response'
+        schema do
+          key :'$ref', :Movie
+        end
+      end
+    end
+  end
   def index
     @movies = current_user.movies
     render json: {
