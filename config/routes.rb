@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   get '/movies', to: 'movies#index'
   get '/movies/:id', to: 'movies#show'
-  delete '/movies',to: 'movies#delete'
+  delete '/movies/:id',to: 'movies#delete'
   post '/movies', to: 'movies#create'
 
   get '/search/:search_term', to: 'search#search'
