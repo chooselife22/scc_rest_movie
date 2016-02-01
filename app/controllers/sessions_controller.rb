@@ -1,6 +1,57 @@
 class SessionsController < ApplicationController
+  include Swagger::Blocks
+
   #skip_before_filter :verify_authenticity_token, only: :auth_twitter
   #
+  swagger_path '/sign_in' do
+    operation :post do
+      key :description, 'Login via email and password'
+      parameter do
+        key :name, 'user'
+        key :description, 'JSON Object with keys "email" and "password"'
+        key :in, :body
+        key :required, true
+        key :type, :string
+        key :default, '{"user": {"email": "test@test.com", "password": "test"}}'
+      end
+      response 200 do
+        key :description, 'Response with valid Authorization Token'
+      end
+      response 401 do
+        key :description, 'Response if Credentials are invalid'
+      end
+    end
+  end
+  swagger_path '/sign_out' do
+    operation :post do
+      key :description, 'Logut'
+      parameter do
+        key :name, 'token'
+        key :description, 'Your current Authorization Token'
+        key :in, :body
+        key :required, true
+        key :type, :string
+      end
+      response 200 do
+        key :description, 'Response for successfull logout'
+      end
+      response 404 do
+        key :description, 'Response for failed logout'
+      end
+    end
+  end
+
+  swagger_path '/auth/google_oauth2' do
+    operation :get do
+      key :description, 'Intitial Request for OAuth2 flow with Google+'
+      response 200 do
+        key :description, 'Response with One Time Token from google if your credentials are correct'
+      end
+      response 404 do
+        key :description, 'Reponse if your Crendentials are wrong'
+      end
+    end
+  end
 
   def create
     identity = Identity.find_by_email(params[:user][:email])
