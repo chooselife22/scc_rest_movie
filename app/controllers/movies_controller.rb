@@ -91,16 +91,16 @@ class MoviesController < ApplicationController
     render json: {movie: movie}, status: 201
   end
 
-  swagger_path '/movies' do
+  swagger_path '/movies/{id}' do
     operation :delete do
       key :description, "deletes a Movie from the current Users Movies identified by it's ID"
       parameter do
         key :name, 'id'
         key :description, 'ID of the movie you want to remove from the current users movies'
-        key :in, :body
+        key :in, :path
         key :required, true
         key :type, :integer
-        key :default, '{"id": <id>}'
+        key :default, '<id>'
       end
       parameter do
         key :name, 'Authorization'
@@ -109,7 +109,7 @@ class MoviesController < ApplicationController
         key :required, true
         key :type, :string
       end
-      response 204 do
+      response 200 do
         key :description, 'no content'
         schema do
           key :'$ref', :Movie
