@@ -119,7 +119,7 @@ class MoviesController < ApplicationController
   end
   def delete
     current_user.movies.delete(movie)
-    render json: {message: 'movies succesfully deleted from your list'}, status: 204
+    render json: {message: 'movies succesfully deleted from your list'}, status: 200
   end
 
   private
