@@ -22,3 +22,7 @@
 **.swn
 
 /public
+
+
+# MAC
+.DS_Store
