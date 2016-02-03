@@ -54,7 +54,10 @@ class SessionsController < ApplicationController
   end
 
   def create
-    identity = Identity.find_by_email(params[:user][:email])
+    identity = Identity.where(email: params[:user][:email]).first_or_create do |i|
+      i.password = params[:user][:password]
+      i.password_confirmation = params[:user][:password]
+    end
     if identity && identity.authenticate(params[:user][:password])
       if identity.user.nil? 
         user = User.where(email: params[:user][:email]).first_or_create do |u|

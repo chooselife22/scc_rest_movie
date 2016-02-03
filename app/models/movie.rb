@@ -10,5 +10,11 @@ class Movie < ActiveRecord::Base
       key :type, :integer
       key :format, :int64
     end
+    property :title do
+      key :type, :string
+    end
+    property :release do
+      key :type, :string
+    end
   end
 end
