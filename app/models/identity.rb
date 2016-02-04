@@ -1,5 +1,5 @@
 class Identity < ActiveRecord::Base
-  has_secure_password
+  belongs_to :user
 
   attr_accessor :password, :password_confirmation
   validates :password, length: (1..32), confirmation: true, if: :setting_password?
