@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160122131728) do
+ActiveRecord::Schema.define(version: 20160205223203) do
 
   create_table "auth_tokens", force: :cascade do |t|
     t.string   "token"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20160122131728) do
     t.string  "email"
     t.string  "password_digest"
     t.integer "user_id"
+    t.string  "password_salt"
   end
 
   create_table "movies", force: :cascade do |t|
